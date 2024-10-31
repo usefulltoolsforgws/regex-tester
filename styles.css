@@ -1,0 +1,424 @@
+:root {
+  --primary-bg: #ffffff;
+  --secondary-bg: #f5f5f5;
+  --primary-text: #333333;
+  --secondary-text: #666666;
+  --border-color: #e0e0e0;
+  --highlight-color: #fde047;
+  --button-bg: #4a4a4a;
+  --button-text: #ffffff;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 10px;
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+  width: 600px; /* Set the width for the popup */
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: var(--primary-bg);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.regex-input {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.delimiter {
+  font-size: 24px;
+  margin: 0 5px;
+}
+
+.input, .textarea, .result-div {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.regex-pattern {
+  flex-grow: 1;
+}
+
+.regex-flags-select {
+  width: 80px; /* Adjust this value to make it approximately three times shorter */
+  margin-left: 10px;
+  padding: 4px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+  font-size: 12px;
+  height: 30px;
+}
+
+.regex-flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.regex-flags label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.regex-flags input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.result-div {
+  background-color: var(--secondary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 8px;
+  min-height: 20px;
+}
+
+.highlight {
+  background-color: var(--highlight-color);
+}
+
+.match-count {
+  font-size: 12px;
+  color: var(--secondary-text);
+  margin-top: 5px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-button.active {
+  border-bottom-color: var(--primary-text);
+}
+
+.accordion-heading {
+  background-color: var(--secondary-bg);
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.accordion-heading.active {
+  background-color: var(--primary-bg);
+}
+
+.accordion-content {
+  display: none;
+  border: 1px solid var(--border-color);
+  border-top: none;
+  padding: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Add any other styles that were previously inline */
+
+/* Add this to your existing styles.css file */
+mark {
+  background-color: var(--highlight-color);
+  padding: 2px;
+  border-radius: 2px;
+}
+
+.match {
+  background-color: var(--secondary-bg);
+  padding: 2px 4px;
+  border-radius: 4px;
+  margin: 2px;
+  display: inline-block;
+}
+
+/* Add these new styles to your existing styles.css file */
+.highlighted-text {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 8px;
+  min-height: 80px;
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.highlighted-text mark {
+  background-color: var(--highlight-color);
+  padding: 2px;
+  border-radius: 2px;
+}
+
+.match {
+  background-color: var(--secondary-bg);
+  padding: 2px 4px;
+  border-radius: 4px;
+  margin: 2px;
+  display: inline-block;
+}
+
+.text-input-container {
+  position: relative;
+}
+
+.textarea {
+  width: 100%;
+  height: 100px;
+  resize: vertical;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: transparent;
+  color: transparent;
+  caret-color: var(--primary-text);
+}
+
+.text-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 8px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  pointer-events: none;
+  color: var(--primary-text);
+  overflow: hidden;
+}
+
+/* Add these styles to your existing styles.css file */
+.quickref-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+.quickref-table th, .quickref-table td {
+  border: 1px solid var(--border-color);
+  padding: 8px;
+  text-align: left;
+}
+
+.quickref-table th {
+  background-color: var(--secondary-bg);
+  font-weight: bold;
+}
+
+.quickref-table tr:nth-child(even) {
+  background-color: var(--secondary-bg);
+}
+
+/* Add these styles to your existing styles.css file */
+.playbook-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.playbook-table th,
+.playbook-table td {
+  border: 1px solid var(--border-color);
+  padding: 8px;
+  text-align: left;
+}
+
+.playbook-table th {
+  background-color: var(--secondary-bg);
+  font-weight: bold;
+}
+
+.playbook-table tr:nth-child(even) {
+  background-color: var(--secondary-bg);
+}
+
+.playbook-table code {
+  font-family: monospace;
+  background-color: var(--secondary-bg);
+  padding: 2px 4px;
+  border-radius: 4px;
+  word-break: break-all;
+}
+
+.info-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  cursor: pointer;
+  margin-left: 5px;
+  color: var(--secondary-text);
+}
+
+.info-btn:hover {
+  background-color: var(--secondary-bg);
+}
+
+.tooltip {
+  position: absolute;
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 12px;
+  z-index: 1000;
+  max-width: 200px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.copy-playbook-regex {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.copy-playbook-regex:hover {
+  opacity: 0.8;
+}
+
+.copy-playbook-regex svg {
+  width: 16px;
+  height: 16px;
+  color: var(--secondary-text);
+}
+
+.copy-playbook-regex:hover svg {
+  color: var(--primary-text);
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  z-index: 1000;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.toast.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rating-widget {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.stars {
+  font-size: 24px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.star {
+  color: #ccc;
+  transition: color 0.2s;
+  display: inline-block;
+}
+
+.star:hover,
+.star.active,
+.star.hover {
+  color: #ffd700;
+}
+
+.email-contact {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--secondary-text);
+}

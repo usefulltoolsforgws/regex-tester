@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "RegEx Tester",
+  "version": "1.0",
+  "description": "A simple regex tester extension",
+  "host_permissions": [
+    "https://regex-tester.tilda.ws/"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}

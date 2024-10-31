@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RegEx Tester</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1 class="title">RegEx Tester</h1>
+    </header>
+
+    <main class="regex-matcher">
+      <div class="regex-input">
+        <input type="text" class="input regex-pattern" value="\b[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b" placeholder="Enter regex pattern" aria-label="Regex pattern">
+        <button class="btn-icon copy-regex" title="Copy regex pattern" aria-label="Copy regex pattern">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="regex-flags">
+        <label><input type="checkbox" name="flag" value="g"> global <button class="info-btn" data-tooltip="Matches all occurrences">i</button></label>
+        <label><input type="checkbox" name="flag" value="m"> multi line <button class="info-btn" data-tooltip="^ and $ match start/end of each line">i</button></label>
+        <label><input type="checkbox" name="flag" value="i"> insensitive <button class="info-btn" data-tooltip="Case-insensitive matching">i</button></label>
+      </div>
+
+      <div class="input-group">
+        <label for="test-text">Input string</label>
+        <div class="text-input-container">
+          <textarea id="test-text" class="textarea" rows="4">This is a sample text to demonstrate how the email recognition feature of this extension works. If you have any questions or need further assistance, feel free to contact our support team at usefulltoolsforgws@gmail.com. We hope you find this tool useful! We also look forward to receiving your feedback at the same email address: usefulltoolsforgws@gmail.com. Happy coding!</textarea>
+          <div id="test-text-overlay" class="text-overlay"></div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="result-div">Matched Strings</label>
+        <div id="result-div" class="result-div" aria-live="polite"></div>
+        <div class="match-count" aria-live="polite"></div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn clear-all">Clear All</button>
+      </div>
+
+      <div class="error-message hidden" aria-live="assertive"></div>
+
+      <nav class="tabs" role="tablist">
+        <button class="tab-button active" role="tab" aria-selected="true" aria-controls="regex-quickref-tab">RegEx QuickRef</button>
+        <button class="tab-button" role="tab" aria-selected="false" aria-controls="regex-playbook-tab">Regex Playbook</button>
+      </nav>
+
+      <div id="regex-quickref-tab" class="tab-content active" role="tabpanel">
+        <h3>RegEx Quick Reference</h3>
+        <div class="accordion">
+          <div class="accordion-item">
+            <h4 class="accordion-heading">1. Characters</h4>
+            <div class="accordion-content">
+              <table class="quickref-table">
+                <tr><th>Pattern</th><th>Description</th></tr>
+                <tr><td>.</td><td>Matches any single character except newline (\n), carriage return (\r), and a few other special characters</td></tr>
+                <tr><td>\d or [0-9]</td><td>Matches any digit (0-9)</td></tr>
+                <tr><td>\D or [^0-9]</td><td>Matches any non-digit character</td></tr>
+                <tr><td>\w or [A-Za-z0-9_]</td><td>Matches any word character (letters, digits, and underscore)</td></tr>
+                <tr><td>\W or [^A-Za-z0-9_]</td><td>Matches any non-word character</td></tr>
+                <tr><td>\s</td><td>Matches any whitespace character (space, tab, linefeed, etc.)</td></tr>
+                <tr><td>\S</td><td>Matches any non-whitespace character</td></tr>
+                <tr><td>\t</td><td>Matches a tab</td></tr>
+                <tr><td>\r</td><td>Matches a carriage return</td></tr>
+                <tr><td>\n</td><td>Matches a linefeed</td></tr>
+                <tr><td>\v</td><td>Matches a vertical tab</td></tr>
+                <tr><td>\f</td><td>Matches a form-feed</td></tr>
+                <tr><td>[\b]</td><td>Matches a backspace</td></tr>
+                <tr><td>\0</td><td>Matches a NUL character (ASCII 0)</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h4 class="accordion-heading">2. Assertions</h4>
+            <div class="accordion-content">
+              <table class="quickref-table">
+                <tr><th>Pattern</th><th>Description</th></tr>
+                <tr><td>^</td><td>Matches the start of the string</td></tr>
+                <tr><td>$</td><td>Matches the end of the string</td></tr>
+                <tr><td>\b</td><td>Matches a word boundary</td></tr>
+                <tr><td>\B</td><td>Matches a non-word boundary</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h4 class="accordion-heading">3. Groups & Ranges</h4>
+            <div class="accordion-content">
+              <table class="quickref-table">
+                <tr><th>Pattern</th><th>Description</th></tr>
+                <tr><td>x|y</td><td>Matches either x or y</td></tr>
+                <tr><td>[xyz], [a-c]</td><td>Matches any single character inside the brackets</td></tr>
+                <tr><td>[^xyz], [^a-c]</td><td>Matches any single character not inside the brackets</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h4 class="accordion-heading">4. Quantifiers</h4>
+            <div class="accordion-content">
+              <table class="quickref-table">
+                <tr><th>Pattern</th><th>Description</th></tr>
+                <tr><td>x*</td><td>Matches "x" 0 or more times</td></tr>
+                <tr><td>x+</td><td>Matches "x" 1 or more times</td></tr>
+                <tr><td>x{n,}</td><td>Matches "x" at least n times</td></tr>
+                <tr><td>x{n,m}</td><td>Matches "x" between n and m times</td></tr>
+                <tr><td>x*?, x+?</td><td>Non-greedy versions of * and +</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h4 class="accordion-heading">5. Escape Sequences</h4>
+            <div class="accordion-content">
+              <table class="quickref-table">
+                <tr><th>Pattern</th><th>Description</th></tr>
+                <tr><td>\</td><td>Escapes the next character</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="regex-playbook-tab" class="tab-content hidden" role="tabpanel">
+        <h3>Regex Playbook</h3>
+        <table class="playbook-table">
+          <tr>
+            <th>Name</th>
+            <th>Regex</th>
+            <th>Description</th>
+            <th>Copy</th>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td><code>\b[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b</code></td>
+            <td>Validates basic email addresses.</td>
+            <td><button class="copy-playbook-regex">Copy</button></td>
+          </tr>
+          <tr>
+            <td>Date (YYYY-MM-DD)</td>
+            <td><code>^\d{4}-\d{2}-\d{2}$</code></td>
+            <td>Matches dates in ISO format (e.g., 2024-10-20).</td>
+            <td><button class="copy-playbook-regex">Copy</button></td>
+          </tr>
+          <tr>
+            <td>Floating Point Number</td>
+            <td><code>^[+-]?([0-9]*[.])?[0-9]+$</code></td>
+            <td>Matches positive and negative floating-point numbers.</td>
+            <td><button class="copy-playbook-regex">Copy</button></td>
+          </tr>
+          <tr>
+            <td>Hexadecimal Color</td>
+            <td><code>^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$</code></td>
+            <td>Matches 3 or 6-digit hexadecimal color codes (e.g., #fff or #123456).</td>
+            <td><button class="copy-playbook-regex">Copy</button></td>
+          </tr>
+          <tr>
+            <td>IP Address (IPv4)</td>
+            <td><code>^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$</code></td>
+            <td>Matches a valid IPv4 address (e.g., 192.168.1.1).</td>
+            <td><button class="copy-playbook-regex">Copy</button></td>
+          </tr>
+          <tr>
+            <td>Hexadecimal Number</td>
+            <td><code>^0x[0-9a-fA-F]+$</code></td>
+            <td>Matches hexadecimal numbers (e.g., 0x1A3F).</td>
+            <td><button class="copy-playbook-regex">Copy</button></td>
+          </tr>
+          <tr>
+            <td>Postal Code (US)</td>
+            <td><code>^\d{5}(-\d{4})?$</code></td>
+            <td>Matches a U.S. ZIP code, with or without the 4-digit extension (e.g., 12345 or 12345-6789).</td>
+            <td><button class="copy-playbook-regex">Copy</button></td>
+          </tr>
+          <tr>
+            <td>Phone Number (US)</td>
+            <td><code>^\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$</code></td>
+            <td>Matches U.S. phone numbers in various formats (e.g., (123) 456-7890, 123-456-7890).</td>
+            <td><button class="copy-playbook-regex">Copy</button></td>
+          </tr>
+          <tr>
+            <td>UUID</td>
+            <td><code>^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$</code></td>
+            <td>Matches a UUID (e.g., 550e8400-e29b-41d4-a716-446655440000).</td>
+            <td><button class="copy-playbook-regex">Copy</button></td>
+          </tr>
+          <tr>
+            <td>MAC Address</td>
+            <td><code>^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$</code></td>
+            <td>Matches a valid MAC address (e.g., 00:0a:95:9d:68:16).</td>
+            <td><button class="copy-playbook-regex">Copy</button></td>
+          </tr>
+          <tr>
+            <td>Time (HH:MM:SS)</td>
+            <td><code>^\d{2}:\d{2}:\d{2}$</code></td>
+            <td>Matches a time in 24-hour format (e.g., 14:30:15).</td>
+            <td><button class="copy-playbook-regex">Copy</button></td>
+          </tr>
+          <tr>
+            <td>Slug (URL-friendly string)</td>
+            <td><code>^[a-z0-9]+(?:-[a-z0-9]+)*$</code></td>
+            <td>Matches a URL-friendly slug (e.g., this-is-a-slug).</td>
+            <td><button class="copy-playbook-regex">Copy</button></td>
+          </tr>
+          <tr>
+            <td>Username (Alphanumeric, 3-16 characters)</td>
+            <td><code>^[a-zA-Z0-9_-]{3,16}$</code></td>
+            <td>Matches a typical username with alphanumeric characters, underscores, and hyphens.</td>
+            <td><button class="copy-playbook-regex">Copy</button></td>
+          </tr>
+          <tr>
+            <td>Valid XML Tag</td>
+            <td><code>^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$</code></td>
+            <td>Matches a valid XML tag (e.g., <tag>content</tag> or <tag />).</td>
+            <td><button class="copy-playbook-regex">Copy</button></td>
+          </tr>
+          <tr>
+            <td>Website URL</td>
+            <td><code>^(https?:\/\/)?([\w\-]+\.)+[\w\-]+(\/[\w\-._~:\/?#[\]@!$&'()*+,;=]*)?$</code></td>
+            <td>Matches a valid URL, with or without http/https (e.g., https://www.example.com).</td>
+            <td><button class="copy-playbook-regex">Copy</button></td>
+          </tr>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <div class="rating-widget">
+    <p>Rate this extension:</p>
+    <div class="stars">
+      <span class="star" data-value="1">★</span>
+      <span class="star" data-value="2">★</span>
+      <span class="star" data-value="3">★</span>
+      <span class="star" data-value="4">★</span>
+      <span class="star" data-value="5">★</span>
+    </div>
+  </div>
+  <p class="email-contact">Email us: usefulltoolsforgws@gmail.com</p>
+
+  <script src="popup.js"></script>
+
+  <!-- Add this at the end of the body, just before the closing </body> tag -->
+  <div id="toast" class="toast hidden">Copied to clipboard</div>
+</body>
+</html>
